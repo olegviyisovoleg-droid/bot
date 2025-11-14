@@ -92,3 +92,13 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Хендлер для обычного текста от всех
+async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Список команд, которые видят обычные пользователи
+    commands_list = "/start — запустить бота"
+    await update.message.reply_text(
+        f"Для взаимодействия используйте команды:\n{commands_list}"
+    )
+
+# В main() после других хендлеров добавляем:
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
